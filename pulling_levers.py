@@ -112,7 +112,7 @@ def move(direction: str, location: Tuple[int]) -> Tuple[int]:
 
 
 def pull_lever():
-    user_input = input("Pull a lever (y/n):")
+    user_input = input("Pull a lever (y/n):\n")
     global coin_count
     if user_input.lower() == "y":
         coin_count += 1
