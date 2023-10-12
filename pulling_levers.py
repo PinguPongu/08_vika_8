@@ -9,6 +9,7 @@ WEST = "w"
 
 STARTING_LOCATION = (1, 1)
 FINAL_DESTINATION = (3, 1)
+LEVER_LOCATION = ((1, 2), (2, 2), (2, 3), (3, 2))
 
 coin_count = 0
 
@@ -17,6 +18,7 @@ def main():
     location = STARTING_LOCATION
     while location != FINAL_DESTINATION:
         location = play_one_move(location)
+
     print(f"Victory! Total coins {coin_count}.")
 
 def play_one_move(location: Tuple[int]) -> Tuple[int]:
@@ -30,6 +32,8 @@ def play_one_move(location: Tuple[int]) -> Tuple[int]:
 
     if direction in valid_directions:
         location = move(direction, location)
+        if location in LEVER_LOCATION:
+            pull_lever()
     else:
         print("Not a valid direction!")
 
@@ -42,7 +46,7 @@ def find_directions(location: Tuple[int]) -> Tuple[str]:
     if location == (1, 1):
         valid_directions = (NORTH,)
     elif location == (1, 2):
-        pull_lever()
+
         valid_directions = NORTH, EAST, SOUTH
     elif location == (1, 3):
         valid_directions = EAST, SOUTH
@@ -50,13 +54,13 @@ def find_directions(location: Tuple[int]) -> Tuple[str]:
         valid_directions = (NORTH,)
     elif location == (2, 2):
         valid_directions = SOUTH, WEST
-        pull_lever()
+
     elif location == (2, 3):
         valid_directions = EAST, WEST
-        pull_lever()
+
     elif location == (3, 2):
         valid_directions = NORTH, SOUTH
-        pull_lever()
+
     elif location == (3, 3):
         valid_directions = SOUTH, WEST
 
@@ -108,11 +112,12 @@ def move(direction: str, location: Tuple[int]) -> Tuple[int]:
 
 
 def pull_lever():
-    user_input = input("Pull lever (y/n):")
+    user_input = input("Pull a lever (y/n):")
     global coin_count
     if user_input.lower() == "y":
         coin_count += 1
-        print(f"You recieved 1 coin, your total is now {coin_count}.")
+ 
+        print(f"You received 1 coin, your total is now {coin_count}.")
 
 
 if __name__ == "__main__":
