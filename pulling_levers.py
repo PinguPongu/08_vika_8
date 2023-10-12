@@ -23,6 +23,10 @@ def main():
 
 
 def play():
+    """
+    Main gameplay loop
+    """
+
     global coin_count
     coin_count = 0
     location = STARTING_LOCATION
@@ -119,6 +123,10 @@ def move(direction: str, location: Tuple[int]) -> Tuple[int]:
 
 
 def pull_lever():
+    """
+    Prompts the user with a level pull and 
+    adds 1 to the coin count
+    """
     user_input = input("Pull a lever (y/n): ")
     global coin_count
     if user_input.lower() == "y":
